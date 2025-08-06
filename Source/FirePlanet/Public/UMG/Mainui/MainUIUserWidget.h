@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "MainUIUserWidget.generated.h"
 
+class UButton;
 /**
  * 
  */
@@ -13,5 +14,15 @@ UCLASS()
 class FIREPLANET_API UMainUIUserWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+protected:
+
+	
+public:
+	UPROPERTY(meta = (BindWidget="Button_50"))
+	UButton* Button_50;
+
+	UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
+	void ButtonClickedCallBack();
 	
 };

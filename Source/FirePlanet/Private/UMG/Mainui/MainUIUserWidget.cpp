@@ -3,3 +3,7 @@
 
 #include "UMG/Mainui/MainUIUserWidget.h"
 
+void UMainUIUserWidget::ButtonClickedCallBack_Implementation()
+{
+	UE_LOG(LogTemp,Log,TEXT("ButtonClickedCallBack"));
+}
