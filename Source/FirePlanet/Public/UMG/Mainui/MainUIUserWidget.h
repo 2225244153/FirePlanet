@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "MainUIUserWidget.generated.h"
 
+class UBorder;
 class UButton;
 /**
  * 
@@ -16,13 +17,20 @@ class FIREPLANET_API UMainUIUserWidget : public UUserWidget
 	GENERATED_BODY()
 
 protected:
-
+	virtual void NativeOnInitialized() override;
 	
 public:
-	UPROPERTY(meta = (BindWidget="Button_50"))
-	UButton* Button_50;
+	/*UPROPERTY(meta = (BindWidget))
+	UButton* TestButton;
 
-	UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
-	void ButtonClickedCallBack();
+	UPROPERTY(meta = (BindWidget))
+	UBorder* TestBorder;*/
+
+	//纯虚函数  用于子类重写 不能再cpp文件里进行实现
+	/*UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
+	UBorder* GetBorder();*/
+
+	UFUNCTION(BlueprintCallable)
+	void CallFunction();
 	
 };

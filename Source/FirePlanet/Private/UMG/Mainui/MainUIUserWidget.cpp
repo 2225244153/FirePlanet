@@ -3,7 +3,30 @@
 
 #include "UMG/Mainui/MainUIUserWidget.h"
 
-void UMainUIUserWidget::ButtonClickedCallBack_Implementation()
+#include "Components/Border.h"
+#include "Components/Button.h"
+
+
+void UMainUIUserWidget::NativeOnInitialized()
 {
-	UE_LOG(LogTemp,Log,TEXT("ButtonClickedCallBack"));
+	Super::NativeOnInitialized();
+	/*//获取蓝图添加的控件
+	if (UButton* Btn = Cast<UButton>(GetWidgetFromName(TEXT("Button_50"))))
+	{
+		Btn->OnClicked.AddDynamic(this, &UMainUIUserWidget::CallFunction);
+	}*/
+
+	//TestButton->OnClicked.AddDynamic(this,&UMainUIUserWidget::CallFunction);
+
+
+	
+}
+
+void UMainUIUserWidget::CallFunction()
+{
+	/*if (GetBorder())
+	{
+		GetBorder()->SetBrushColor(FLinearColor(FMath::FRand(),FMath::FRand(),FMath::FRand(),1));
+	}*/
+	UE_LOG(LogTemp,Warning,TEXT("UMainUIUserWidget::CallFunction"));
 }

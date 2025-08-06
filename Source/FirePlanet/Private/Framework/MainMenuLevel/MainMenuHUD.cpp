@@ -20,5 +20,6 @@ void AMainMenuHUD::BeginPlay()
 			MainUIUserWidget->AddToViewport();
 		}
 	}
+	GetOwningPlayerController()->SetShowMouseCursor(true);
 	
 }
