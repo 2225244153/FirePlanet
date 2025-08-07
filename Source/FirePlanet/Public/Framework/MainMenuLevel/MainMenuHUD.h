@@ -6,6 +6,7 @@
 #include "GameFramework/HUD.h"
 #include "MainMenuHUD.generated.h"
 
+class UOptionUserWidget;
 class UMainUIUserWidget;
 /**
  * 
@@ -18,8 +19,15 @@ class FIREPLANET_API AMainMenuHUD : public AHUD
 protected:
 	virtual void BeginPlay() override;
 
-public:
 
+	UFUNCTION(BlueprintCallable)
+	void ShowOptionUI();
+	
+public:
+	
 	UPROPERTY()
 	UMainUIUserWidget* MainUIUserWidget;
+
+	UPROPERTY()
+	UOptionUserWidget* OptionUserWidget;
 };

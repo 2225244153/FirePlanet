@@ -18,19 +18,22 @@ class FIREPLANET_API UMainUIUserWidget : public UUserWidget
 
 protected:
 	virtual void NativeOnInitialized() override;
+
+	UFUNCTION()
+	void StartGameClicked();
+	UFUNCTION()
+	void SettingGameClicked();
+	UFUNCTION()
+	void AboutGameClicked();
 	
 public:
-	/*UPROPERTY(meta = (BindWidget))
-	UButton* TestButton;
-
 	UPROPERTY(meta = (BindWidget))
-	UBorder* TestBorder;*/
+	UButton* Button_StartGame;
+	UPROPERTY(meta = (BindWidget))
+	UButton* Button_SettingGame;
+	UPROPERTY(meta = (BindWidget))
+	UButton* Button_AboutGame;
 
-	//纯虚函数  用于子类重写 不能再cpp文件里进行实现
-	/*UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
-	UBorder* GetBorder();*/
-
-	UFUNCTION(BlueprintCallable)
-	void CallFunction();
-	
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* DX_In;
 };

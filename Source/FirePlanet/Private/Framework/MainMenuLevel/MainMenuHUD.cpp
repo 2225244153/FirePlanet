@@ -5,11 +5,14 @@
 
 #include "Blueprint/UserWidget.h"
 #include "UMG/Mainui/MainUIUserWidget.h"
+#include "UMG/Setting/OptionUserWidget.h"
 
 void AMainMenuHUD::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetOwningPlayerController()->SetShowMouseCursor(true);
+	
 	TSubclassOf<UMainUIUserWidget>const MainUIUserWidgetClass = LoadClass<UMainUIUserWidget>(nullptr,
 		TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/UMG/Main/WBP_MainUI.WBP_MainUI_C'"));
 	if (MainUIUserWidgetClass)
@@ -20,6 +23,22 @@ void AMainMenuHUD::BeginPlay()
 			MainUIUserWidget->AddToViewport();
 		}
 	}
-	GetOwningPlayerController()->SetShowMouseCursor(true);
-	
+}
+
+void AMainMenuHUD::ShowOptionUI()
+{
+	if (!OptionUserWidget)
+	{
+		TSubclassOf<UOptionUserWidget>const OptionUserWidgetClass = LoadClass<UOptionUserWidget>(nullptr,
+	TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/UMG/Setting/WBP_Option.WBP_Option_C'"));
+		if (OptionUserWidgetClass)
+		{
+			OptionUserWidget = CreateWidget<UOptionUserWidget>(GetOwningPlayerController(),OptionUserWidgetClass);
+			if (OptionUserWidget)
+			{
+				OptionUserWidget->AddToViewport();
+			}
+		}
+	}
+
 }
