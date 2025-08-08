@@ -20,12 +20,20 @@ protected:
 
 	virtual void NativeOnInitialized() override;
 
+	virtual void NativeDestruct() override;
+
 	UFUNCTION()
 	void NormalOptionClicked();
 	UFUNCTION()
 	void InputOptionClicked();
+	
 	UFUNCTION()
 	void EscClicked();
+
+	
+	void DelayDestruct();
+
+	FTimerHandle OutTimer;
 	
 
 public:
@@ -40,4 +48,10 @@ public:
 
 	UPROPERTY(meta = (BindWidget))
 	UWidgetSwitcher* Switcher_Option;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* DX_In;
+
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* DX_Out;
 };

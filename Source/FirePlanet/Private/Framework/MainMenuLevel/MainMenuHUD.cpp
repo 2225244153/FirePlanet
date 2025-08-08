@@ -30,7 +30,7 @@ void AMainMenuHUD::ShowOptionUI()
 	if (!OptionUserWidget)
 	{
 		TSubclassOf<UOptionUserWidget>const OptionUserWidgetClass = LoadClass<UOptionUserWidget>(nullptr,
-	TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/UMG/Setting/WBP_Option.WBP_Option_C'"));
+	TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/UMG/Setting/WBP_Setting_MainOption.WBP_Setting_MainOption_C'"));
 		if (OptionUserWidgetClass)
 		{
 			OptionUserWidget = CreateWidget<UOptionUserWidget>(GetOwningPlayerController(),OptionUserWidgetClass);
