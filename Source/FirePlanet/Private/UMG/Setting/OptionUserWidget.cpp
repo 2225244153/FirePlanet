@@ -5,6 +5,7 @@
 
 #include "Animation/WidgetAnimation.h"
 #include "Components/Button.h"
+#include "Components/CheckBox.h"
 #include "Components/WidgetSwitcher.h"
 #include "Framework/MainMenuLevel/MainMenuHUD.h"
 
@@ -55,5 +56,7 @@ void UOptionUserWidget::DelayDestruct()
 	}
 	GetWorld()->GetTimerManager().ClearTimer(OutTimer);
 }
+
+
 
 

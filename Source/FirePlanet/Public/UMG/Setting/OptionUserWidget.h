@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "OptionUserWidget.generated.h"
 
+class UCheckBox;
 class UWidgetSwitcher;
 class UButton;
 /**
@@ -34,7 +35,8 @@ protected:
 	void DelayDestruct();
 
 	FTimerHandle OutTimer;
-	
+
+	FString GetScreenState();
 
 public:
 	UPROPERTY(meta = (BindWidget))
@@ -54,4 +56,5 @@ public:
 
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* DX_Out;
+	
 };

@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "NormalOptionWidget.generated.h"
 
+class UCheckBox;
 class UComboBoxString;
 /**
  * 
@@ -16,7 +17,7 @@ class FIREPLANET_API UNormalOptionWidget : public UUserWidget
 	GENERATED_BODY()
 
 protected:
-	
+
 	virtual void NativeOnInitialized() override;
 	
 	UFUNCTION()
@@ -24,10 +25,18 @@ protected:
 
 	UFUNCTION()
 	void OnResolutionSelectionChanged(FString SelectedItem, ESelectInfo::Type SelectionType);
+
+	UFUNCTION()
+	void OnFullScreenCheck(bool bIsChecked);
+
+	FString GetScreenState();
 public:
 	UPROPERTY(meta = (BindWidget))
 	UComboBoxString* ComboBoxString_Language;
 
 	UPROPERTY(meta = (BindWidget))
 	UComboBoxString* ComboBoxString_Resolution;
+
+	UPROPERTY(meta = (BindWidget))
+	UCheckBox* CheckBox_FullScreen;
 };

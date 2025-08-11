@@ -3,9 +3,12 @@
 
 #include "UMG/Setting/NormalOptionWidget.h"
 
+#include "Components/CheckBox.h"
 #include "Components/ComboBoxString.h"
+#include "GameFramework/GameUserSettings.h"
 #include "Kismet/KismetInternationalizationLibrary.h"
-
+#include "Kismet/KismetStringLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 
 void UNormalOptionWidget::NativeOnInitialized()
@@ -13,6 +16,8 @@ void UNormalOptionWidget::NativeOnInitialized()
 	Super::NativeOnInitialized();
 	ComboBoxString_Language->OnSelectionChanged.AddDynamic(this,&UNormalOptionWidget::OnLanguageSelectionChanged);
 	ComboBoxString_Resolution->OnSelectionChanged.AddDynamic(this,&UNormalOptionWidget::OnResolutionSelectionChanged);
+	CheckBox_FullScreen->OnCheckStateChanged.AddDynamic(this,&UNormalOptionWidget::OnFullScreenCheck);
+	
 	FString Str = UKismetInternationalizationLibrary::GetCurrentCulture();
 	ComboBoxString_Language->SetSelectedOption(Str);
 
@@ -38,25 +43,45 @@ void UNormalOptionWidget::OnLanguageSelectionChanged(FString SelectedItem, ESele
 
 void UNormalOptionWidget::OnResolutionSelectionChanged(FString SelectedItem, ESelectInfo::Type SelectionType)
 {
-	if (SelectedItem == FString(TEXT("1920x1080")))
+	/*FString Result;
+	Result.Append(FString(TEXT("setRes ")));
+	Result.Append(SelectedItem);
+	Result.Append(GetScreenState());
+	UKismetSystemLibrary::ExecuteConsoleCommand(GetWorld(),Result);*/
+	FString LeftStr;
+	FString RightStr;
+	UKismetStringLibrary::Split(SelectedItem,FString(TEXT("x")),LeftStr,RightStr);
+	int32 const Width = UKismetStringLibrary::Conv_StringToInt(LeftStr);
+	int32 const Height = UKismetStringLibrary::Conv_StringToInt(RightStr);
+	UGameUserSettings::GetGameUserSettings()->SetScreenResolution(FIntPoint(Width,Height));
+}
+
+void UNormalOptionWidget::OnFullScreenCheck(bool bIsChecked)
+{
+	if (bIsChecked)
 	{
-		
-	}
-	else if (SelectedItem == FString(TEXT("1280x720")))
-	{
-		
-	}
-	else if (SelectedItem == FString(TEXT("640x480")))
-	{
-		
-	}
-	else if (SelectedItem == FString(TEXT("320x200")))
-	{
-		
+		UKismetSystemLibrary::ExecuteConsoleCommand(GetWorld(),FString(TEXT("setRes 1920x1080f")));
 	}
 	else
 	{
-		
+		FString Result;
+		Result.Append(FString(TEXT("setRes ")));
+		Result.Append(ComboBoxString_Resolution->GetSelectedOption());
+		Result.Append(GetScreenState());
+		UKismetSystemLibrary::ExecuteConsoleCommand(GetWorld(),Result);
 	}
-	
 }
+
+FString UNormalOptionWidget::GetScreenState()
+{
+	if (CheckBox_FullScreen->IsChecked())
+	{
+		return FString(TEXT("f"));
+	}
+	else
+	{
+		return FString(TEXT("w"));
+	}
+}
+
+
