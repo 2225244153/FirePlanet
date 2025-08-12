@@ -17,6 +17,7 @@ class FIREPLANET_API UMainUIUserWidget : public UUserWidget
 	GENERATED_BODY()
 
 protected:
+
 	virtual void NativeOnInitialized() override;
 
 	UFUNCTION()
@@ -25,7 +26,8 @@ protected:
 	void SettingGameClicked();
 	UFUNCTION()
 	void AboutGameClicked();
-	
+	UFUNCTION()
+	void QuitGameClicked();
 public:
 	UPROPERTY(meta = (BindWidget))
 	UButton* Button_StartGame;
@@ -33,6 +35,8 @@ public:
 	UButton* Button_SettingGame;
 	UPROPERTY(meta = (BindWidget))
 	UButton* Button_AboutGame;
+	UPROPERTY(meta = (BindWidget))
+	UButton* Button_QuitGame;
 
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* DX_In;

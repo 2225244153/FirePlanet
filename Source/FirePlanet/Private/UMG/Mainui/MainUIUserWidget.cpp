@@ -3,6 +3,9 @@
 
 #include "UMG/Mainui/MainUIUserWidget.h"
 #include "Components/Button.h"
+#include "Framework/MainMenuLevel/MainMenuHUD.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "FirePlanet/FirePlanet.h"
 
 void UMainUIUserWidget::NativeOnInitialized()
 {
@@ -20,6 +23,7 @@ void UMainUIUserWidget::NativeOnInitialized()
 	Button_StartGame->OnClicked.AddDynamic(this,&UMainUIUserWidget::StartGameClicked);
 	Button_SettingGame->OnClicked.AddDynamic(this,&UMainUIUserWidget::SettingGameClicked);
 	Button_AboutGame->OnClicked.AddDynamic(this,&UMainUIUserWidget::AboutGameClicked);
+	Button_QuitGame->OnClicked.AddDynamic(this,&UMainUIUserWidget::QuitGameClicked);
 
 	PlayAnimation(DX_In);
 	
@@ -27,15 +31,26 @@ void UMainUIUserWidget::NativeOnInitialized()
 
 void UMainUIUserWidget::StartGameClicked()
 {
+	UE_LOG(LogTemp,Warning,TEXT("%s is %d"), *ConstContent::Text, ConstContent::MaxNumber);
 }
 
 void UMainUIUserWidget::SettingGameClicked()
 {
-	
+	if (AMainMenuHUD* MainMenuHUD = Cast<AMainMenuHUD>(GetOwningPlayer()->GetHUD()))
+	{
+		MainMenuHUD->ShowOptionUI();
+	}
 }
 
 void UMainUIUserWidget::AboutGameClicked()
 {
+	
+}
+
+void UMainUIUserWidget::QuitGameClicked()
+{
+	UKismetSystemLibrary::QuitGame(this,GetWorld()->GetFirstPlayerController(),
+		EQuitPreference::Quit,false);
 }
 
 

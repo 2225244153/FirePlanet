@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "UMG/Mainui/MainUIUserWidget.h"
 #include "UMG/Setting/OptionUserWidget.h"
+#include "FirePlanet/FirePlanet.h"
 
 void AMainMenuHUD::BeginPlay()
 {
@@ -13,8 +14,7 @@ void AMainMenuHUD::BeginPlay()
 
 	GetOwningPlayerController()->SetShowMouseCursor(true);
 	
-	TSubclassOf<UMainUIUserWidget>const MainUIUserWidgetClass = LoadClass<UMainUIUserWidget>(nullptr,
-		TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/UMG/Main/WBP_MainUI.WBP_MainUI_C'"));
+	TSubclassOf<UMainUIUserWidget>const MainUIUserWidgetClass = LoadClass<UMainUIUserWidget>(nullptr,*ConstContent::MainMenuUserWidgetPath);
 	if (MainUIUserWidgetClass)
 	{
 		MainUIUserWidget = CreateWidget<UMainUIUserWidget>(GetOwningPlayerController(),MainUIUserWidgetClass);
@@ -29,9 +29,8 @@ void AMainMenuHUD::ShowOptionUI()
 {
 	if (!OptionUserWidget)
 	{
-		TSubclassOf<UOptionUserWidget>const OptionUserWidgetClass = LoadClass<UOptionUserWidget>(nullptr,
-	TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/UMG/Setting/WBP_Setting_MainOption.WBP_Setting_MainOption_C'"));
-		if (OptionUserWidgetClass)
+		
+		if (TSubclassOf<UOptionUserWidget>const OptionUserWidgetClass = LoadClass<UOptionUserWidget>(nullptr,*ConstContent::OptionUserWidgetPath))
 		{
 			OptionUserWidget = CreateWidget<UOptionUserWidget>(GetOwningPlayerController(),OptionUserWidgetClass);
 			if (OptionUserWidget)

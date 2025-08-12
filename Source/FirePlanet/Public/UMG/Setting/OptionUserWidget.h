@@ -36,8 +36,6 @@ protected:
 
 	FTimerHandle OutTimer;
 
-	FString GetScreenState();
-
 public:
 	UPROPERTY(meta = (BindWidget))
 	UButton* Button_NormalOption;

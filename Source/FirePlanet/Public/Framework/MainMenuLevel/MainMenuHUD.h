@@ -20,8 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 
 
-	UFUNCTION(BlueprintCallable)
-	void ShowOptionUI();
+
 	
 public:
 	
@@ -30,4 +29,7 @@ public:
 
 	UPROPERTY()
 	UOptionUserWidget* OptionUserWidget;
+
+	UFUNCTION(BlueprintCallable)
+	void ShowOptionUI();
 };
