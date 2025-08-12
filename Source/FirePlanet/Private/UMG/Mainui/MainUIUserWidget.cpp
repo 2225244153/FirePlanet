@@ -31,7 +31,7 @@ void UMainUIUserWidget::NativeOnInitialized()
 
 void UMainUIUserWidget::StartGameClicked()
 {
-	UE_LOG(LogTemp,Warning,TEXT("%s is %d"), *ConstContent::Text, ConstContent::MaxNumber);
+	
 }
 
 void UMainUIUserWidget::SettingGameClicked()

@@ -18,7 +18,7 @@ void UNormalOptionWidget::NativeOnInitialized()
 	ComboBoxString_Resolution->OnSelectionChanged.AddDynamic(this,&UNormalOptionWidget::OnResolutionSelectionChanged);
 	CheckBox_FullScreen->OnCheckStateChanged.AddDynamic(this,&UNormalOptionWidget::OnFullScreenCheck);
 	
-	FString Str = UKismetInternationalizationLibrary::GetCurrentCulture();
+	FString const Str = UKismetInternationalizationLibrary::GetCurrentCulture();
 	ComboBoxString_Language->SetSelectedOption(Str);
 
 	
