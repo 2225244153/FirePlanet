@@ -5,9 +5,7 @@
 
 #include "Components/CheckBox.h"
 #include "Components/ComboBoxString.h"
-#include "GameFramework/GameUserSettings.h"
 #include "Kismet/KismetInternationalizationLibrary.h"
-#include "Kismet/KismetStringLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 
@@ -43,17 +41,23 @@ void UNormalOptionWidget::OnLanguageSelectionChanged(FString SelectedItem, ESele
 
 void UNormalOptionWidget::OnResolutionSelectionChanged(FString SelectedItem, ESelectInfo::Type SelectionType)
 {
-	/*FString Result;
+	FString Result;
 	Result.Append(FString(TEXT("setRes ")));
 	Result.Append(SelectedItem);
 	Result.Append(GetScreenState());
-	UKismetSystemLibrary::ExecuteConsoleCommand(GetWorld(),Result);*/
-	FString LeftStr;
-	FString RightStr;
-	UKismetStringLibrary::Split(SelectedItem,FString(TEXT("x")),LeftStr,RightStr);
-	int32 const Width = UKismetStringLibrary::Conv_StringToInt(LeftStr);
-	int32 const Height = UKismetStringLibrary::Conv_StringToInt(RightStr);
-	UGameUserSettings::GetGameUserSettings()->SetScreenResolution(FIntPoint(Width,Height));
+	UKismetSystemLibrary::ExecuteConsoleCommand(GetWorld(),Result);
+	/*if (UGameUserSettings* GameUserSettings = UGameUserSettings::GetGameUserSettings())
+	{
+		FString LeftStr;
+		FString RightStr;
+		UKismetStringLibrary::Split(SelectedItem,FString(TEXT("x")),LeftStr,RightStr);
+		int32 const Width = UKismetStringLibrary::Conv_StringToInt(LeftStr);
+		int32 const Height = UKismetStringLibrary::Conv_StringToInt(RightStr);
+		GameUserSettings->SetScreenResolution(FIntPoint(Width,Height));
+		GameUserSettings->ApplySettings(false);
+		GameUserSettings->SetFullscreenMode(GetWindowMode());
+		GameUserSettings->SaveSettings();
+	}*/
 }
 
 void UNormalOptionWidget::OnFullScreenCheck(bool bIsChecked)
@@ -83,5 +87,19 @@ FString UNormalOptionWidget::GetScreenState()
 		return FString(TEXT("w"));
 	}
 }
+
+EWindowMode::Type UNormalOptionWidget::GetWindowMode()
+{
+	if (CheckBox_FullScreen->IsChecked())
+	{
+		return EWindowMode::Type::Fullscreen;
+	}
+	else
+	{
+		return EWindowMode::Type::Windowed;
+	}
+}
+
+
 
 

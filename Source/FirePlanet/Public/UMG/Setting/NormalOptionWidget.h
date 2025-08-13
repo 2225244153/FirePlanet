@@ -30,6 +30,8 @@ protected:
 	void OnFullScreenCheck(bool bIsChecked);
 
 	FString GetScreenState();
+
+	EWindowMode::Type GetWindowMode();
 public:
 	UPROPERTY(meta = (BindWidget))
 	UComboBoxString* ComboBoxString_Language;
