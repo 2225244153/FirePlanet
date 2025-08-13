@@ -6,7 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "UMG/Mainui/MainUIUserWidget.h"
 #include "UMG/Setting/OptionUserWidget.h"
-#include "Const/ConstText.h"
+#include "Common/ConstText.h"
 
 void AMainMenuHUD::BeginPlay()
 {
